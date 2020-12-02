@@ -1,4 +1,6 @@
-const parseInput = (input: string) => input.split('\n').map((v: string) => parseInt(v, 10));
+const parseInput = (input: string) => input
+  .split('\n')
+  .map((v: string) => parseInt(v, 10));
 
 export const executePart1 = (input: string) => {
   const elems = parseInput(input);
