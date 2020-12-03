@@ -1,11 +1,11 @@
-const parseInput = (input: string) => input
-  .split('\n')
-  .map((v: string) => parseInt(v, 10));
+let parsedInput: number[] = [];
+export const before = (input: string) => {
+  parsedInput = input.split('\n').map((v: string) => parseInt(v, 10));
+}
 
-export const executePart1 = (input: string) => {
-  const elems = parseInput(input);
-  const small = elems.filter((elem) => elem <= 1010);
-  const big = elems.filter((elem) => elem > 1010);
+export const executePart1 = () => {
+  const small = parsedInput.filter((elem) => elem <= 1010);
+  const big = parsedInput.filter((elem) => elem > 1010);
 
   for (const sn of small) {
     for (const bn of big) {
@@ -18,15 +18,13 @@ export const executePart1 = (input: string) => {
 };
 
 
-export const executePart2 = (input: string) => {
-  const elems = parseInput(input);
-
-  for (const n1 of elems) {
-    for (const n2 of elems) {
+export const executePart2 = () => {
+  for (const n1 of parsedInput) {
+    for (const n2 of parsedInput) {
       if (n1 + n2 > 2020) {
         continue;
       }
-      for (const n3 of elems) {
+      for (const n3 of parsedInput) {
         if (n1 + n2 + n3 === 2020) {
           return n1 * n2 * n3;
         }

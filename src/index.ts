@@ -6,7 +6,10 @@ const runDay = (day: number) => {
   console.log(`Running day: ${day}`);
   const dayMod: IDay = require(`./day${day}`);
 
-  const input = fs.readFileSync(`input/${day}.txt`).toString();
+  let input = fs.readFileSync(`input/${day}.txt`).toString();
+  if (dayMod.before) {
+    dayMod.before(input);
+  }
 
   console.log(`Part 1: ${dayMod.executePart1(input)}`);
   console.log(`Part 2: ${dayMod.executePart2(input)}`);
