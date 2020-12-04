@@ -1,14 +1,13 @@
 import * as readline from 'readline';
 import * as fs from 'fs';
-import { IDay } from './typings';
 
 const runDay = (day: number) => {
   console.log(`Running day: ${day}`);
-  const dayMod: IDay = require(`./day${day}`);
+  const dayMod = require(`./day${day}`);
 
   let input = fs.readFileSync(`input/${day}.txt`).toString();
-  if (dayMod.before) {
-    dayMod.before(input);
+  if (dayMod.parseInput) {
+    input = dayMod.parseInput(input);
   }
 
   console.log(`Part 1: ${dayMod.executePart1(input)}`);

@@ -1,15 +1,12 @@
-let treeMap: boolean[][] = [];
-export const before = (input: string) => {
-  treeMap = input.split('\n').map((row) => row.split('').map((cell) => cell === '#'));
-}
+export const parseInput = (input: string) => input.split('\n').map((row) => row.split('').map((cell) => cell === '#'));
 
-export const executePart1 = () => treeMap
+export const executePart1 = (treeMap: boolean[][]) => treeMap
   .slice(1)
   .reduce((trees, row, index) => row[((index + 1) * 3) % (row.length)]
     ? trees + 1
     : trees, 0);
 
-export const executePart2 = () => {
+export const executePart2 = (treeMap: boolean[][]) => {
   const vectors = [
     { velX: 1, velY: 1 },
     { velX: 3, velY: 1 },

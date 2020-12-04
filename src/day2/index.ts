@@ -1,9 +1,6 @@
-let passwords: RegExpMatchArray[] = [];
-export const before = (input: string) => {
-  passwords = input.split('\n').map((pwd) => pwd.match(/(\d+)-(\d+) (\w): (\w+)/));
-}
+export const parseInput = (input: string) => input.split('\n').map((pwd) => pwd.match(/(\d+)-(\d+) (\w): (\w+)/));
 
-export const executePart1 = () => passwords
+export const executePart1 = (passwords: RegExpMatchArray[]) => passwords
   .filter((pwd) => {
     const min = parseInt(pwd[1], 10);
     const max = parseInt(pwd[2], 10);
@@ -15,7 +12,7 @@ export const executePart1 = () => passwords
   })
   .length;
 
-export const executePart2 = () => passwords
+export const executePart2 = (passwords: RegExpMatchArray[]) => passwords
   .filter((pwd) => {
     const firstPlace = parseInt(pwd[1], 10) - 1;
     const secondPlace = parseInt(pwd[2], 10) - 1;
