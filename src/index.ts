@@ -1,6 +1,8 @@
 import * as readline from 'readline';
 import * as fs from 'fs';
 
+console.log();
+
 const runDay = (day: number) => {
   console.log(`Running day: ${day}`);
   const dayMod = require(`./day${day}`);
@@ -16,8 +18,8 @@ const runDay = (day: number) => {
   process.exit(0);
 };
 
-if (!!process.env.DAY) {
-  runDay(parseInt(process.env.DAY, 10));
+if (!!process.argv[2]) {
+  runDay(parseInt(process.argv[2], 10));
 }
 
 const rli = readline.createInterface(process.stdin, process.stdout);
