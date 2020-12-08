@@ -21,13 +21,25 @@ export const parseInput = (input: string) => input
     const contains = inside.map<IContains>((rule) => {
       const info = rule.match(/^(\d+) (\w+ \w+)/);
       return { color: info[2], amount: parseInt(info[1], 10) };
-    })
+    });
 
     return { color, contains }
   });
 
-export const executePart1 = (input: IBag[]) => {
-};
+const findGoldBags = (bags: IBag[], currentBag: IBag): number => {
+  const gold = currentBag.contains.find(({ color }) => color === 'shiny gold');
+  if (gold !== undefined) {
+    return gold.amount;
+  }
+  return currentBag.contains
+    .map(({ color }) => bags.find((bag) => bag.color === color))
+    .reduce((acc, bag) => acc + findGoldBags(bags, bag), 0);
+}
+
+export const executePart1 = (input: IBag[]) => input
+  .filter((bag) => findGoldBags(input, bag) > 0)
+  .length;
 
 export const executePart2 = (input: IBag[]) => {
+  return 'fuck this part';
 };
