@@ -25,13 +25,10 @@ const filterNumbers = (currN: number, i: number, numbers: number[]) => {
 export const executePart1 = (input: number[]) => input.find(filterNumbers);
 
 const sum = (numbers: number[]) => numbers.reduce((a, b) => a + b);
-const minMax = (numbers: number[]) => numbers.reduce((acc, n) => ({
-  min: acc.min < n ? acc.min : n,
-  max: acc.max > n ? acc.max : n,
-}), {
-  min: Infinity,
-  max: 0
-});
+const minMax = (numbers: number[]) => numbers.reduce(([min, max], n) => [
+  min < n ? min : n,
+  max > n ? max : n,
+], [Infinity, 0]);
 
 export const executePart2 = (input: number[]) => {
   const target = input.find(filterNumbers);
@@ -40,7 +37,7 @@ export const executePart2 = (input: number[]) => {
     for (let preambleEnd = preambleStart + 2; preambleEnd < input.length; preambleEnd++) {
       const preamble = input.slice(preambleStart, preambleEnd);
       if (sum(preamble) === target) {
-        const { min, max } = minMax(preamble);
+        const [min, max] = minMax(preamble);
         return min + max;
       }
     }
